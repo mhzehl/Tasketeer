@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasketeer", "Tasketeer\Tasketeer.csproj", "{40621559-822E-419F-82BE-DA4435919BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40621559-822E-419F-82BE-DA4435919BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40621559-822E-419F-82BE-DA4435919BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40621559-822E-419F-82BE-DA4435919BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40621559-822E-419F-82BE-DA4435919BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FFD0D2E-6BA0-4E22-B977-09D46D45678A}
+	EndGlobalSection
+EndGlobal
