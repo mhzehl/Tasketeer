@@ -64,7 +64,6 @@ namespace Tasketeer
 
             var todo1 = new Models.Todo
             {
-                Id = 1,
                 Name = "Groceries",
                 Description = "Buy ham and cheese at the local supermarket",
                 isCompleted = false
@@ -72,7 +71,6 @@ namespace Tasketeer
 
             var todo2 = new Models.Todo
             {
-                Id = 2,
                 Name = "Party",
                 Description = "Beerpong to the max",
                 isCompleted = true

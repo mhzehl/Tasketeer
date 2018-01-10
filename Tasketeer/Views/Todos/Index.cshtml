@@ -1,0 +1,57 @@
+﻿@model Tasketeer.ViewModels.TodosViewModel
+
+@{
+    ViewData["Title"] = "Task List";
+}
+
+<div class="container">
+    <h1 class="page-header">Task list</h1>
+    <div class="row">
+        <div class="col-6 col-md-2"><strong>Task</strong></div>
+        <div class="col-6 col-md-5"><strong>Description</strong></div>
+        <div class="col-6 col-md-5"></div>
+    </div>
+    <hr />
+
+    @foreach (var todo in Model.Todos)
+    {
+        if (todo.isCompleted)
+        {
+            <div class="row">
+                <div class="col-6 col-md-2"><p>@todo.Name</p></div>
+                <div class="col-6 col-md-5"><p>@todo.Description</p></div>
+                <div class="col-6 col-md-5">
+                    <button class="btn btn-success"> Mark as completed</button>
+                    @using (Html.BeginForm("Delete", "Todos", new { id = todo.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" value="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                    }
+                </div>
+            </div>
+            <hr />
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-6 col-md-2"><p class="strikethrough">@todo.Name</p></div>
+                <div class="col-6 col-md-5"><p class="strikethrough">@todo.Description</p></div>
+                <div class="col-6 col-md-5">
+                    <button class="btn btn-success"> Mark as completed</button>
+                    @using (Html.BeginForm("Delete", "Todos", new { id = todo.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" value="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                    }
+                </div>
+            </div>
+            <hr />
+        }
+    }
+
+    <div>
+        <a href="@Url.Action("Add")" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add new task</a>
+    </div>
+
+</div>
+
