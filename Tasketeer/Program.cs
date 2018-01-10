@@ -18,27 +18,30 @@ namespace Tasketeer
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<TodoContext>();
+                    AddSeedData(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while migrating the database.");
+                }
+            }
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
-            services.AddMvc();
-        }
-
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IConfiguration configuration)
-        {
-            loggerFactory.AddConsole(configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-            var context = app.ApplicationServices.GetService<TodoContext>();
-        }
 
         private static void AddSeedData(TodoContext context)
         {
@@ -64,8 +67,7 @@ namespace Tasketeer
                 Id = 1,
                 Name = "Groceries",
                 Description = "Buy ham and cheese at the local supermarket",
-                isCompleted = false,
-                UserId = user1.Id
+                isCompleted = false
             };
 
             var todo2 = new Models.Todo
@@ -73,13 +75,13 @@ namespace Tasketeer
                 Id = 2,
                 Name = "Party",
                 Description = "Beerpong to the max",
-                isCompleted = true,
-                UserId = user2.Id
+                isCompleted = true
             };
 
             context.Todos.AddRange(todo1, todo2);
 
             context.SaveChanges();
         }
+
     }
 }
