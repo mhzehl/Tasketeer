@@ -5,42 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <h1 class="page-header">Add Task</h1>
+<div class="container-fluid">
 
     <div class="row">
-        @using (Html.BeginForm("Add", "Todos", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                @Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-2" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(x => x.Name, htmlAttributes: new { @class = "form-control" })
-                    <span class="help-block">@Html.ValidationMessageFor(x => x.Name)</span>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.Description, new { @class = "control-label col-lg-2" })
-                <div class="col-lg-10">
-                    @Html.TextAreaFor(x => x.Description, htmlAttributes: new { @class = "form-control" })
-                    <span class="help-block">@Html.ValidationMessageFor(x => x.Name)</span>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.isCompleted, new { @class = "control-label col-lg-2" })
-                <div class="col-lg-1">
-                    @Html.CheckBoxFor(x => x.isCompleted, htmlAttributes: new { @class = "form-control" })
-                    <span class="help-block">@Html.ValidationMessageFor(x => x.isCompleted)</span>
-                </div>
-            </div>
+        <div class="col">
+            @using (Html.BeginForm("Add", "Todos", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <h1 class="page-header">Add Task</h1>
 
-            <div class="row text-right">
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add Task</button>
-            </div>
-        }
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Name)
+                    @Html.TextBoxFor(x => x.Name, htmlAttributes: new { @class = "form-control" })
+                    <small class="help-block">@Html.ValidationMessageFor(x => x.Name)</small>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Description)
+                    @Html.TextAreaFor(x => x.Description, htmlAttributes: new { @class = "form-control" })
+                    <span class="help-block">@Html.ValidationMessageFor(x => x.Description)</span>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add Task</button>
+                </div>
+            }
+
+        </div>
 
     </div>
-
 </div>
 
 

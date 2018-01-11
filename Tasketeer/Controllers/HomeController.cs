@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tasketeer.Models;
+using Tasketeer.ViewModels;
 
 namespace Tasketeer.Controllers
 {
