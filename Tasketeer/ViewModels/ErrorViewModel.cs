@@ -1,6 +1,6 @@
 using System;
 
-namespace Tasketeer.Models
+namespace Tasketeer.ViewModels
 {
     public class ErrorViewModel
     {
