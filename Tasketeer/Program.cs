@@ -7,6 +7,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Tasketeer.Models;
+using Microsoft.AspNetCore.Builder;
 
 namespace Tasketeer
 {
@@ -14,12 +18,70 @@ namespace Tasketeer
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<TodoContext>();
+                    AddSeedData(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while migrating the database.");
+                }
+            }
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+
+        private static void AddSeedData(TodoContext context)
+        {
+            var user1 = new Models.User
+            {
+                Id = 1,
+                FirstName = "Melvin",
+                Lastname = "Zehl"
+            };
+
+            var user2 = new Models.User
+            {
+                Id = 2,
+                FirstName = "Peter",
+                Prefix = "Van",
+                Lastname = "Mahoniehout"
+            };
+
+            context.Users.AddRange(user1, user2);
+
+            var todo1 = new Models.Todo
+            {
+                Name = "Groceries",
+                Description = "Buy ham and cheese at the local supermarket",
+                isCompleted = false,
+                User = user1
+            };
+
+            var todo2 = new Models.Todo
+            {
+                Name = "Party",
+                Description = "Beerpong to the max",
+                isCompleted = true,
+                User = user2
+            };
+
+            context.Todos.AddRange(todo1, todo2);
+
+            context.SaveChanges();
+        }
+
     }
 }

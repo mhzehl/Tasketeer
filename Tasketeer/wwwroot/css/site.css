@@ -33,3 +33,11 @@
         display: none;
     }
 }
+
+.btn {
+    margin: 5px !important;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
