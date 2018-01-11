@@ -66,14 +66,16 @@ namespace Tasketeer
             {
                 Name = "Groceries",
                 Description = "Buy ham and cheese at the local supermarket",
-                isCompleted = false
+                isCompleted = false,
+                User = user1
             };
 
             var todo2 = new Models.Todo
             {
                 Name = "Party",
                 Description = "Beerpong to the max",
-                isCompleted = true
+                isCompleted = true,
+                User = user2
             };
 
             context.Todos.AddRange(todo1, todo2);
