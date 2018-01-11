@@ -9,7 +9,7 @@ using Tasketeer.Models;
 namespace Tasketeer
 {
     //"This class is needed to run \"dotnet ef...\" commands from command line on development. Not used anywhere else"
-    public class MultiTenancyDbContextFactory : IDesignTimeDbContextFactory<TodoContext>
+    public class TodoDbContextFactory : IDesignTimeDbContextFactory<TodoContext>
     {
         public TodoContext CreateDbContext(string[] args)
         {
